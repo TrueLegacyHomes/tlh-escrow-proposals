@@ -21,7 +21,8 @@ export default function ActionBar({ proposal }: ActionBarProps) {
           import('../lib/pdf/fa-title-pdf'),
         ]);
 
-      const prefix = parseAddressForFilename(proposal.transaction.propertyAddress);
+      const { street, number } = parseAddressForFilename(proposal.transaction.propertyAddress);
+      const addrSuffix = number ? `${street}_${number}` : street;
 
       // Generate all three PDFs
       const oakwoodDoc = generateOakwoodPDF(proposal);
@@ -29,10 +30,11 @@ export default function ActionBar({ proposal }: ActionBarProps) {
       const faTitleDoc = generateFATitlePDF(proposal);
 
       // Download each via temporary anchor tags
+      // Naming: Escrow_Fee_Oakwood_Main St_1234
       const downloads: [Blob, string][] = [
-        [oakwoodDoc.output('blob'), `${prefix}_Oakwood_Escrow.pdf`],
-        [faEscrowDoc.output('blob'), `${prefix}_FA_Escrow.pdf`],
-        [faTitleDoc.output('blob'), `${prefix}_FA_Title.pdf`],
+        [oakwoodDoc.output('blob'), `Escrow_Fee_Oakwood_${addrSuffix}.pdf`],
+        [faEscrowDoc.output('blob'), `Escrow_Fee_First AM_${addrSuffix}.pdf`],
+        [faTitleDoc.output('blob'), `Title_Fee_First AM_${addrSuffix}.pdf`],
       ];
 
       for (const [blob, filename] of downloads) {

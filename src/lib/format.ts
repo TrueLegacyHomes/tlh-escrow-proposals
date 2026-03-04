@@ -37,25 +37,23 @@ export function formatDate(dateStr: string): string {
 }
 
 /**
- * Extract street number + street name from a full address and return a
- * filename-safe string like "1234_Main".
+ * Extract street name + number from a full address for use in filenames.
  *
- * Strips city/state/zip, replaces spaces with underscores, and truncates
- * to a reasonable length.
+ * "1234 Ocean View Dr, Del Mar, CA 92014"  →  { street: "Ocean View Dr", number: "1234" }
+ *
+ * Used to build filenames like: Escrow_Fee_Oakwood_Ocean View Dr_1234
  */
-export function parseAddressForFilename(address: string): string {
-  if (!address) return 'proposal';
+export function parseAddressForFilename(address: string): { street: string; number: string } {
+  if (!address) return { street: 'Address', number: '' };
 
   // Take only the street portion (before the first comma)
   const streetPart = address.split(',')[0].trim();
-
-  // Extract street number and first word of street name
   const parts = streetPart.split(/\s+/);
-  if (parts.length === 0) return 'proposal';
+  if (parts.length === 0) return { street: 'Address', number: '' };
 
-  // Take at most the number + street name (first two meaningful words)
-  const meaningful = parts.slice(0, 2);
-  const slug = meaningful.join('_').replace(/[^a-zA-Z0-9_]/g, '');
+  // First token is the street number, rest is the street name
+  const number = parts[0].replace(/[^a-zA-Z0-9]/g, '');
+  const street = parts.slice(1).join(' ').replace(/[^a-zA-Z0-9 ]/g, '').trim();
 
-  return slug || 'proposal';
+  return { street: street || 'Address', number };
 }

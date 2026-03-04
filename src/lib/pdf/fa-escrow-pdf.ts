@@ -34,45 +34,42 @@ export function generateFAEscrowPDF(proposal: ProposalSet): jsPDF {
 
   let y = 0;
 
-  // === HEADER BAR (navy — traditional FA corporate) ===
-  doc.setFillColor(navy[0], navy[1], navy[2]);
-  doc.rect(0, 0, pageWidth, 100, 'F');
+  // === HEADER: white logo area + blue bar (matches firstam.com brand) ===
+  // White background for logo (full page width, so logo is clearly visible)
+  doc.setFillColor(white[0], white[1], white[2]);
+  doc.rect(0, 0, pageWidth, 70, 'F');
 
-  // Blue accent line
-  doc.setFillColor(blue[0], blue[1], blue[2]);
-  doc.rect(0, 100, pageWidth, 4, 'F');
-
-  // Eagle logo (left side)
+  // Eagle logo (left side, on white background for clear contrast)
   try {
-    // The FA logo is 472x110 — scale to fit header proportionally
-    doc.addImage(FA_LOGO_BASE64, 'PNG', margin, 20, 180, 42);
+    doc.addImage(FA_LOGO_BASE64, 'PNG', margin, 14, 190, 44);
   } catch (err) {
-    // Fallback: text-only
     doc.setFont(font, 'bold');
     doc.setFontSize(18);
-    doc.setTextColor(white[0], white[1], white[2]);
-    doc.text('First American', margin, 45);
+    doc.setTextColor(navy[0], navy[1], navy[2]);
+    doc.text('First American', margin, 40);
   }
 
-  // Subtitle below logo
-  doc.setFont(font, 'italic');
-  doc.setFontSize(11);
-  doc.setTextColor(blue[0], blue[1], blue[2]);
-  doc.text('Escrow Services', margin, 80);
-
-  // Office info (right side)
+  // Office info (right side, on white)
   const headerRight = pageWidth - margin;
   doc.setFont(font, 'normal');
-  doc.setFontSize(9);
+  doc.setFontSize(8);
+  doc.setTextColor(textGray[0], textGray[1], textGray[2]);
+  doc.text(FA_OFFICER.office, headerRight, 22, { align: 'right' });
+  doc.text(FA_OFFICER.city, headerRight, 33, { align: 'right' });
+  doc.text(`Phone: ${FA_OFFICER.phone}`, headerRight, 47, { align: 'right' });
+  doc.setTextColor(navy[0], navy[1], navy[2]);
+  doc.text(FA_OFFICER.email, headerRight, 58, { align: 'right' });
+
+  // Blue bar below logo area (brand accent)
+  doc.setFillColor(blue[0], blue[1], blue[2]);
+  doc.rect(0, 70, pageWidth, 36, 'F');
+  doc.setFont(font, 'bold');
+  doc.setFontSize(13);
   doc.setTextColor(white[0], white[1], white[2]);
-  doc.text(FA_OFFICER.office, headerRight, 30, { align: 'right' });
-  doc.text(FA_OFFICER.city, headerRight, 43, { align: 'right' });
-  doc.text(`Phone: ${FA_OFFICER.phone}`, headerRight, 60, { align: 'right' });
-  doc.setTextColor(blue[0], blue[1], blue[2]);
-  doc.text(FA_OFFICER.email, headerRight, 73, { align: 'right' });
-  doc.setFontSize(7);
-  doc.setTextColor(150, 160, 180);
-  doc.text('www.firstam.com', headerRight, 90, { align: 'right' });
+  doc.text('ESCROW SERVICES', margin, 93);
+  doc.setFont(font, 'normal');
+  doc.setFontSize(8);
+  doc.text('www.firstam.com', headerRight, 93, { align: 'right' });
 
   y = 130;
 
