@@ -10,10 +10,13 @@ export default function OakwoodPreview({ proposal }: OakwoodPreviewProps) {
 
   return (
     <div class="rounded-xl overflow-hidden shadow-md border border-gray-200 bg-[#f8f7f4]">
-      {/* Gold header bar */}
-      <div class="bg-[#af9c6e] px-5 py-3">
-        <h3 class="text-white font-bold text-lg">Oakwood Escrow</h3>
-        <p class="text-white/80 text-xs">A Division of Lawyers Title Company</p>
+      {/* Gold header bar with logo */}
+      <div class="bg-[#2c2c2c] px-5 py-3 flex items-center gap-3">
+        <img src={`${import.meta.env.BASE_URL}oakwood-logo.png`} alt="Oakwood Escrow" class="h-8 object-contain" />
+        <div>
+          <h3 class="text-[#af9c6e] font-bold text-sm leading-tight">Oakwood Escrow</h3>
+          <p class="text-white/60 text-[10px]">A Division of Lawyers Title Company</p>
+        </div>
       </div>
 
       <div class="p-5">

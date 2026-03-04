@@ -43,7 +43,12 @@ export default function ProposalForm({
   };
 
   const inputClass =
-    'w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 ' +
+    'w-full max-w-xs rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 ' +
+    'placeholder-gray-400 focus:border-[#38b5ad] focus:ring-2 focus:ring-[#38b5ad]/30 ' +
+    'focus:outline-none transition-colors';
+
+  const inputClassWide =
+    'w-full max-w-md rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 ' +
     'placeholder-gray-400 focus:border-[#38b5ad] focus:ring-2 focus:ring-[#38b5ad]/30 ' +
     'focus:outline-none transition-colors';
 
@@ -58,7 +63,7 @@ export default function ProposalForm({
         <legend class="text-sm font-bold uppercase tracking-wider text-[#38b5ad] mb-3">
           Agent Info
         </legend>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
           <div>
             <label class={labelClass} htmlFor="agentName">
               Agent Name
@@ -89,7 +94,7 @@ export default function ProposalForm({
               }
             />
           </div>
-          <div class="md:col-span-2">
+          <div>
             <label class={labelClass} htmlFor="agentEmail">
               Agent Email
             </label>
@@ -112,15 +117,15 @@ export default function ProposalForm({
         <legend class="text-sm font-bold uppercase tracking-wider text-[#38b5ad] mb-3">
           Property Info
         </legend>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="md:col-span-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
+          <div>
             <label class={labelClass} htmlFor="propertyAddress">
               Property Address
             </label>
             <input
               id="propertyAddress"
               type="text"
-              class={inputClass}
+              class={inputClassWide}
               placeholder="1234 Main St, Riverside, CA 92501"
               value={transaction.propertyAddress}
               onInput={(e) =>
@@ -177,7 +182,7 @@ export default function ProposalForm({
         <legend class="text-sm font-bold uppercase tracking-wider text-[#38b5ad] mb-3">
           Oakwood Fees
         </legend>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
           <div>
             <label class={labelClass} htmlFor="oakwoodSellerFee">
               Seller Fee
