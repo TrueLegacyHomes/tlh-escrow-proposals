@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import App from '../components/App';
+---
+
+<Layout title="Escrow Proposals">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-black text-[var(--color-charcoal)] mb-1">
+        Generate Fee Proposals
+      </h2>
+      <p class="text-[var(--color-gray-warm)] text-sm">
+        Enter transaction details once &mdash; get 3 branded proposals instantly
+      </p>
+    </div>
+
+    <App client:load />
+  </section>
+</Layout>

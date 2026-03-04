@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-teal: #38b5ad;
+  --color-teal-dark: #2a908a;
+  --color-teal-light: #e6f7f6;
+  --color-navy: #0f4676;
+  --color-cream: #f7f5e7;
+  --color-cream-dark: #ede9d5;
+  --color-charcoal: #1a1a1a;
+  --color-gray-warm: #6b7280;
+  --color-white: #ffffff;
+
+  /* Oakwood Escrow palette */
+  --color-oakwood-gold: #af9c6e;
+  --color-oakwood-gold-dark: #938966;
+  --color-oakwood-charcoal: #2c2c2c;
+  --color-oakwood-cream: #f8f7f4;
+
+  /* First American palette */
+  --color-fa-blue: #4eade1;
+  --color-fa-navy: #141d3a;
+
+  --font-sans: 'Lato', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
+  background-color: var(--color-cream);
+}
+
+/* Form input focus */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-teal);
+  box-shadow: 0 0 0 3px rgba(56, 181, 173, 0.15);
+}

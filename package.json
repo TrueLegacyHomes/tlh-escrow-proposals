@@ -1,0 +1,18 @@
+{
+  "name": "tlh-escrow-proposals",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0 --port 4322",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^4.1.3",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^5.17.1",
+    "jspdf": "^2.5.2",
+    "preact": "^10.28.4",
+    "tailwindcss": "^4.2.1"
+  }
+}
