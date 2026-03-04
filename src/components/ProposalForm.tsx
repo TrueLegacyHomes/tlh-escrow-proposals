@@ -42,6 +42,15 @@ export default function ProposalForm({
     return parseFloat(cleaned) || 0;
   };
 
+  /** Auto-format phone to (XXX) XXX-XXXX */
+  const formatPhone = (raw: string): string => {
+    const digits = raw.replace(/\D/g, '').slice(0, 10);
+    if (digits.length <= 3) return digits.length ? `(${digits}` : '';
+    if (digits.length <= 6)
+      return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  };
+
   const inputClass =
     'w-full max-w-xs rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 ' +
     'placeholder-gray-400 focus:border-[#38b5ad] focus:ring-2 focus:ring-[#38b5ad]/30 ' +
@@ -87,11 +96,12 @@ export default function ProposalForm({
               id="agentPhone"
               type="tel"
               class={inputClass}
-              placeholder="(555) 123-4567"
+              placeholder="(619) 980-3333"
               value={transaction.agentPhone}
-              onInput={(e) =>
-                updateField('agentPhone', (e.target as HTMLInputElement).value)
-              }
+              onInput={(e) => {
+                const formatted = formatPhone((e.target as HTMLInputElement).value);
+                updateField('agentPhone', formatted);
+              }}
             />
           </div>
           <div>

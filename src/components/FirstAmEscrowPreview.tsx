@@ -12,13 +12,10 @@ export default function FirstAmEscrowPreview({
 
   return (
     <div class="rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white">
-      {/* Navy header bar with FA eagle logo */}
-      <div class="bg-[#141d3a] px-5 py-3 flex items-center gap-3">
-        <img src={`${import.meta.env.BASE_URL}fa-logo.png`} alt="First American" class="h-8 object-contain" />
-        <div>
-          <h3 class="text-[#4eade1] font-bold text-sm leading-tight">First American Escrow</h3>
-          <p class="text-white/60 text-[10px]">Escrow Services</p>
-        </div>
+      {/* White logo area + navy accent bar — matches FA brand presentation */}
+      <div class="bg-white px-5 pt-4 pb-3 border-b-[3px] border-[#4eade1]">
+        <img src={`${import.meta.env.BASE_URL}fa-logo.png`} alt="First American" class="h-7 object-contain" />
+        <p class="text-[#141d3a] text-[10px] font-semibold mt-1.5 tracking-wide uppercase">Escrow Services</p>
       </div>
 
       <div class="p-5">

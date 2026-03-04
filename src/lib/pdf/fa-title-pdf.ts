@@ -79,33 +79,23 @@ export function generateFATitlePDF(proposal: ProposalSet): jsPDF {
 
   y = 130;
 
-  // === TITLE ===
+  // === TITLE + DATE ===
   doc.setFont(font, 'bold');
   doc.setFontSize(22);
   doc.setTextColor(navy[0], navy[1], navy[2]);
   doc.text('Title Fee Proposal', margin, y);
 
+  // Today's date (right-aligned)
+  doc.setFont(font, 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(textGray[0], textGray[1], textGray[2]);
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  doc.text(today, pageWidth - margin, y, { align: 'right' });
+
   y += 8;
   doc.setFillColor(blue[0], blue[1], blue[2]);
   doc.rect(margin, y, 80, 3, 'F');
-  y += 28;
-
-  // === PROPOSAL INTRO ===
-  if (transaction.agentName) {
-    doc.setFont(font, 'normal');
-    doc.setFontSize(11);
-    doc.setTextColor(textGray[0], textGray[1], textGray[2]);
-    doc.text(`Dear ${transaction.agentName},`, margin, y);
-    y += 20;
-    doc.text(
-      'Thank you for the opportunity to provide title insurance services. Below is our',
-      margin,
-      y,
-    );
-    y += 16;
-    doc.text('estimated title fee proposal for the following transaction:', margin, y);
-    y += 28;
-  }
+  y += 24;
 
   // === TRANSACTION DETAILS ===
   doc.setFillColor(navy[0], navy[1], navy[2]);
@@ -225,15 +215,12 @@ export function generateFATitlePDF(proposal: ProposalSet): jsPDF {
   doc.setFont(font, 'italic');
   doc.setFontSize(8);
   doc.setTextColor(textGray[0], textGray[1], textGray[2]);
-  const disclaimers = [
-    'Estimate only- endorsements, sub escrow fees, wire fees may apply.',
-    'First American Title Insurance Company makes no express or implied warranty respecting the',
-    'information presented and assumes no responsibility for errors or omissions.',
-  ];
-  disclaimers.forEach((line) => {
-    doc.text(line, margin, y);
-    y += 12;
-  });
+  const disclaimerText =
+    'Estimate only — endorsements, sub escrow fees, wire fees may apply. ' +
+    'First American Title Insurance Company makes no express or implied warranty respecting the ' +
+    'information presented and assumes no responsibility for errors or omissions.';
+  doc.text(disclaimerText, margin, y, { maxWidth: contentWidth });
+  y += 36;
 
   // === BOTTOM BAR — matches FA Escrow ===
   doc.setFillColor(navy[0], navy[1], navy[2]);
